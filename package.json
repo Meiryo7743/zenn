@@ -1,0 +1,29 @@
+{
+  "name": "meiryo7743-zenn-contents",
+  "version": "1.0.0",
+  "private": true,
+  "author": "Meiryo7743",
+  "scripts": {
+    "new": "zenn new:article",
+    "postinstall": "husky install",
+    "start": "zenn preview"
+  },
+  "devDependencies": {
+    "husky": "^5.0.9",
+    "lint-staged": "^10.5.4",
+    "prettier": "2.2.1",
+    "textlint": "^11.8.2",
+    "textlint-filter-rule-node-types": "^1.1.0",
+    "textlint-rule-abbr-within-parentheses": "^1.0.2",
+    "textlint-rule-preset-ja-engineering-paper": "^1.0.2",
+    "textlint-rule-preset-ja-spacing": "^2.0.2",
+    "textlint-rule-preset-ja-technical-writing": "^4.0.1",
+    "textlint-rule-spellcheck-tech-word": "^5.0.0",
+    "zenn-cli": "^0.1.73"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  }
+}

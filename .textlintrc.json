@@ -1,0 +1,56 @@
+{
+  "rules": {
+    "abbr-within-parentheses": true,
+    "preset-ja-engineering-paper": {
+      "@textlint-ja/textlint-rule-no-synonyms": true,
+      "ja-hiragana-fukushi": true,
+      "ja-hiragana-hojodoushi": true,
+      "ja-hiragana-keishikimeishi": true,
+      "prh": false,
+      "use-si-units": true,
+      "unify-kuten-and-touten": false
+    },
+    "preset-ja-spacing": {
+      "ja-nakaguro-or-halfwidth-space-between-katakana": true,
+      "ja-no-space-around-parentheses": true,
+      "ja-no-space-between-full-width": true,
+      "ja-space-between-half-and-full-width": {
+        "space": "always"
+      },
+      "ja-space-after-exclamation": true,
+      "ja-space-after-question": true,
+      "ja-space-around-code": {
+        "before": true,
+        "after": true
+      }
+    },
+    "preset-ja-technical-writing": {
+      "arabic-kanji-numbers": true,
+      "ja-no-mixed-period": true,
+      "ja-no-redundant-expression": true,
+      "ja-no-successive-word": true,
+      "ja-no-weak-phrase": true,
+      "ja-unnatural-alphabet": true,
+      "max-comma": true,
+      "max-kanji-continuous-len": true,
+      "max-ten": true,
+      "no-double-negative-ja": true,
+      "no-doubled-conjunction": true,
+      "no-doubled-conjunctive-particle-ga": true,
+      "no-doubled-joshi": true,
+      "no-dropping-the-ra": true,
+      "no-exclamation-question-mark": false,
+      "no-hankaku-kana": true,
+      "no-invalid-control-character": true,
+      "no-mix-dearu-desumasu": true,
+      "no-nfd": true,
+      "no-unmatched-pair": true
+    },
+    "spellcheck-tech-word": true
+  },
+  "filters": {
+    "node-types": {
+      "nodeTypes": ["BlockQuote"]
+    }
+  }
+}

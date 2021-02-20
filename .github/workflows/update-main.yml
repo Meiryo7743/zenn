@@ -1,0 +1,24 @@
+name: Update main
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: actions/checkout@v2.3.4
+        uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f
+
+      - name: repo-sync/pull-request@v2.5
+        uses: repo-sync/pull-request@d80b305e358ef8131f270608735c72e2c913f2af
+        with:
+          source_branch: ${{ github.ref }}
+          destination_branch: main
+          pr_title: Update main
+          pr_label: auto-pr
+          pr_allow_empty: false
+          github_token: ${{ secrets.GITHUB_TOKEN }}
