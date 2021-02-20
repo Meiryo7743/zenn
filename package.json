@@ -4,7 +4,6 @@
   "private": true,
   "author": "Meiryo7743",
   "scripts": {
-    "new": "zenn new:article",
     "postinstall": "husky install",
     "start": "zenn preview"
   },
