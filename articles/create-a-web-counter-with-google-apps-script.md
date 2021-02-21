@@ -3,7 +3,7 @@ title: "Google Apps Script でアクセスカウンターを作る"
 emoji: "📈"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["gas", "web"]
-published: false
+published: true
 ---
 
 その昔，多くのウェブサイトでアクセスカウンターが設置されていました。サイトにどれだけのアクセスがあったのかを計測するためです。しかしながら，[Google アナリティクス](https://marketingplatform.google.com/about/analytics/)のようなアクセス解析ツールが普及したり，そもそも CGI を使う機会が減ったり……といった背景からなのでしょうか，現在ではあまり見かけない代物です。[^ggr]もちろん，今でも CGI 環境の構築さえすれば，当然のことながら自作のカウンターを設置できます。
