@@ -10,7 +10,9 @@ published: false
 
 [^ggr]: それでも「[アクセスカウンター 無料](https://www.google.com/search?hl=en&q=%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E3%82%AB%E3%82%A6%E3%83%B3%E3%82%BF%E3%83%BC%20%E7%84%A1%E6%96%99)」と Google で検索すれば，アクセスカウンターを無料で提供してくれるサービスが数多く出てきます。今もなお，一定の需要はあるのかもしれません。
 
-しかし，技術が発展した現代，アクセスカウンターの設置にあたって CGI は不要です。本記事では，[Google Apps Script](https://developers.google.com/apps-script) を用いた実装を試みます。なお，本文中に登場するコードは全て GitHub で公開しておりますので，よろしければご覧ください。
+しかし，技術が発展した現代，アクセスカウンターの設置にあたって CGI は不要です。本記事では，[Google Apps Script](https://developers.google.com/apps-script) を用いた実装を試みます。なお，本文中に登場するコードは全て GitHub で公開しておりますので，よろしければご覧ください。[^source]
+
+[^source]: 本当は TypeScript で書いたコードを公開しようと思ったのですが，わざわざ npm モジュールをインストールするのが億劫で断念しました。`.gs` ファイルは，拡張子を `.js` にしていますので，Clasp を使ってコマンドラインから直接アップロードすることは一応可能です。
 
 https://github.com/Meiryo7743/web-counter
 
