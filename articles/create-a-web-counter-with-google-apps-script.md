@@ -3,7 +3,7 @@ title: "Google Apps Script でアクセスカウンターを作る"
 emoji: "📈"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["gas", "web"]
-published: false
+published: true
 ---
 
 その昔，多くのウェブサイトでアクセスカウンターが設置されていました。サイトにどれだけのアクセスがあったのかを計測するためです。しかしながら，[Google アナリティクス](https://marketingplatform.google.com/about/analytics/)のようなアクセス解析ツールが普及したり，そもそも CGI を使う機会が減ったり……といった背景からなのでしょうか，現在ではあまり見かけない代物です。[^ggr]もちろん，今でも CGI 環境の構築さえすれば，当然のことながら自作のカウンターを設置できます。
@@ -228,9 +228,9 @@ const webCounter = (url) => {
 
 ![](https://storage.googleapis.com/zenn-user-upload/0bbxb5i80wi0sek9rllf4ko4uqa7) _`<iframe>` からアクセスカウンターを呼び出した際の表示_
 
-## 欠点
+## 既知の問題
 
-実を言うと Google Apps Script で実装したこのカウンターには，いくつかの**欠点**が存在します。
+実を言うと Google Apps Script で実装したこのカウンターには，いくつかの**問題点**が存在します。
 
 第一に，**アクセス数を表示するためには JavaScript を有効にする必要がある**という点です。試しにブラウザーの JavaScript を無効にした状態で公開ページを開いてみてください。まっさらなページが表示されるはずです。
 
