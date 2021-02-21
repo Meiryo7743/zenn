@@ -154,7 +154,7 @@ const webCounter = (url) => {
 
 まず一番最初にすべきことは `config()` の実行です。`config.gs` を開き，エディター上部にある「Run」ボタンから，この関数を実行しましょう。そうしないと，`ALLOW_LIST` プロパティーの値が空っぽのままで，アクセスカウンターが一向に使えません。
 
-![](https://storage.googleapis.com/zenn-user-upload/4hf57f6i7w43qphf1vmvsw4fp5fw) _`config()` の実行により，`ALLOW_LIST` という名のスクリプトプロパティーが登録される_
+![](https://storage.googleapis.com/zenn-user-upload/wxav0773zlfxdonvu1l5py7piuvr) _`config()` の実行により，`ALLOW_LIST` という名のスクリプトプロパティーが登録される_
 
 ### デプロイ
 
