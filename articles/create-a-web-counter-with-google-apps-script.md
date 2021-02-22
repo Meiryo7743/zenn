@@ -244,6 +244,14 @@ const webCounter = (url) => {
 
 [^restrict]: [Google Apps Script のドキュメント](https://developers.google.com/apps-script/overview)をざっとしか読んておりませんので，間違っていればご指摘いただきたく存じます。
 
+第三に，**枠線を消しているはずなのに `<iframe>` のボーダーが見える現象**に遭遇する可能性があります。Chromium Edge と Firefox でこの現象を確認しました。どうにかならないだろうかと試行錯誤してみましたが，無駄骨を折るだけでしたので，大人しく目を瞑るしかなさそうです。[^omakan]
+
+少し検索してみた結果，どうやらブラウザーのレンダリングに関する不具合ではないかという，それらしき Stack Overflow の回答を見つけましたので一応載せておきます。
+
+https://stackoverflow.com/questions/46216967/why-does-the-css-border-of-an-iframe-flicker-and-how-to-fix-it
+
+[^omakan]: 尤も，いわゆる「おま環」の可能性は否定できません。
+
 そのほか，**ページの読み込み完了までの時間が幾ばくか長くなる**ことを確認しています。もともと `<iframe>` に遅延読み込みをさせていますが，それを加味しても何だか遅いような気がするのです。試しに Lighthouse で `embed.html` のパフォーマンスを計測してみたものの，特に指摘を受けなかったので，実は大した影響はないのかもしれませんが……。
 
 ## 終わりに
