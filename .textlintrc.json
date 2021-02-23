@@ -49,6 +49,7 @@
     "spellcheck-tech-word": true
   },
   "filters": {
+    "comments": true,
     "node-types": {
       "nodeTypes": ["BlockQuote"]
     }
