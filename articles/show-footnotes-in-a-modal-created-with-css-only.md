@@ -1,5 +1,5 @@
 ---
-title: "CSS の「:target」を用いて脚注をモーダル内に表示する"
+title: "CSS の「:target」だけを用いて脚注をモーダル内に表示する"
 emoji: "💡"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["CSS", "Web"]
