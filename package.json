@@ -4,7 +4,7 @@
   "private": true,
   "author": "Meiryo7743",
   "scripts": {
-    "postinstall": "husky install",
+    "prepare": "husky install",
     "start": "zenn preview"
   },
   "devDependencies": {
