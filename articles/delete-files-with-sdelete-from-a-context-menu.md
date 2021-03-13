@@ -3,7 +3,7 @@ title: "右クリックメニューから『SDelete』による完全削除を�
 emoji: "🚮"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["sdelete", "windows", "powershell"]
-published: false
+published: true
 ---
 
 『[Sysinternals File and Disk Utilities](https://docs.microsoft.com/en-us/sysinternals/downloads/file-and-disk-utilities)』の一部として提供されている，『[SDelete](https://docs.microsoft.com/en-us/sysinternals/downloads/sdelete)』というデータを完全削除できるコマンドラインツールがあります。例えば，PC や HDD， USB メモリーなどを初期化・廃棄するような場合に有用でしょう。そうした用途に限らず，機密情報が含まれる特定のファイルやディレクトリーなどを消し去りたいときにも役立ちます。
