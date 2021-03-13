@@ -74,7 +74,7 @@ $yes = New-Object System.Management.Automation.Host.ChoiceDescription "&Yes", `
   "The files are going to be deleted."
 
 $no = New-Object System.Management.Automation.Host.ChoiceDescription "&No", `
-  "Prevent the execution of deleting file."
+  "Prevent the execution of deleting files."
 
 $options = [System.Management.Automation.Host.ChoiceDescription[]]($yes, $no)
 
