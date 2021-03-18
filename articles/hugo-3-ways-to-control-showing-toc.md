@@ -3,7 +3,7 @@ title: "Hugo で目次の表示を制御する 3 つの方法"
 emoji: "📄"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["hugo"]
-published: false
+published: true
 ---
 
 [Hugo](https://gohugo.io) は，[v0.6.0](https://gohugo.io/news/0.60.0-relnotes/) からデフォルトの Markdown パーサーがそれまでの『[Blackfriday](https://github.com/russross/blackfriday)』から『[Goldmark](https://github.com/yuin/goldmark)』へ変わりました。[^hugo-version]これにより，Goldmark の持つ柔軟性を生かし，[Markdown の出力形式をカスタマイズ](https://gohugo.io/getting-started/configuration-markup/)できるようになりました。
