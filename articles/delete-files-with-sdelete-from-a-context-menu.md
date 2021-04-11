@@ -59,22 +59,22 @@ https://gist.github.com/Meiryo7743/44bf84312a4b0b43f6e79157c48bf23b
 
 ```powershell
 # 削除対象を表示する
-Write-Output "The following files are going to be deleted:"
+Write-Output "The following items are going to be deleted:"
 
-for ($i = 0; $i -lt $Args.Length; $i++) {
-  Write-Output $Args[$i]
+foreach ($item in $Args) {
+  Write-Output $item
 }
 
 # 確認ダイアログ（Y/n）
 $title = "Confirmation"
 
-$message = "Are you sure want to delete them with SDelete?"
+$message = "Once you start the operation, it is unable to restore the items. Are you sure want to delete them with SDelete?"
 
 $yes = New-Object System.Management.Automation.Host.ChoiceDescription "&Yes", `
-  "The files are going to be deleted."
+  "Execute the operation."
 
 $no = New-Object System.Management.Automation.Host.ChoiceDescription "&No", `
-  "Prevent the execution of deleting files."
+  "Cancel the operation."
 
 $options = [System.Management.Automation.Host.ChoiceDescription[]]($yes, $no)
 
@@ -83,14 +83,15 @@ $result = $host.ui.PromptForChoice($title, $message, $options, 0)
 switch ($result) {
   # 「Y」を入力または「Enter」を押下した場合
   0 {
-    for ($i = 0; $i -lt $Args.Length; $i++) {
-      # 削除対象が確かに存在するかチェックする
-      $exists = Test-Path -Path $Args[$i]
+    foreach ($item in $Args) {
+      # 削除対象が確かに存在するか調べる
+      $exists = Test-Path -Path $item
+
 
       if ($exists) {
-        # フォルダーの場合は，サブフォルダーごと消し去る
+        # 「-r」で再帰的に削除処理をする（フォルダーとその中身を全て削除）
         # 「-p 5」は上書き削除を 5 回繰り返すことを意味する
-        sdelete -r -s -p 5 $Args[$i]
+        sdelete -r -s -p 5 $item
       }
       else {
         Write-Error -Messaege "Error: the execution was cancelled because of invalided path." -Category InvalidArgument
