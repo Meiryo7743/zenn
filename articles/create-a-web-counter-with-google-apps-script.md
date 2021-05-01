@@ -191,9 +191,11 @@ const webCounter = (url) => {
     <title>アクセスカウンターの埋め込み表示テスト</title>
     <style>
       body {
+        align-items: center;
         background: black;
         block-size: 100vh;
         display: flex;
+        justify-content: center;
         margin: 0;
       }
       iframe {
