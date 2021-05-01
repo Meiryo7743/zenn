@@ -2,7 +2,7 @@
 title: "Google Apps Script でアクセスカウンターを作る"
 emoji: "📈"
 type: "tech" # tech: 技術記事 / idea: アイデア
-topics: ["gas", "web"]
+topics: ["gas", "googleappsscript", "web"]
 published: true
 ---
 
@@ -10,11 +10,7 @@ published: true
 
 [^ggr]: それでも「[アクセスカウンター 無料](https://www.google.com/search?hl=en&q=%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E3%82%AB%E3%82%A6%E3%83%B3%E3%82%BF%E3%83%BC%20%E7%84%A1%E6%96%99)」と Google で検索すれば，アクセスカウンターを無料で提供してくれるサービスが数多く出てきます。今もなお，一定の需要はあるのかもしれません。
 
-しかし，技術が発展した現代，アクセスカウンターの設置にあたって CGI は不要です。本記事では，[Google Apps Script](https://developers.google.com/apps-script) を用いた実装を試みます。なお，本文中に登場するコードは全て GitHub で公開しておりますので，よろしければご覧ください。[^source]
-
-[^source]: 本当は TypeScript で書いたコードを公開しようと思ったのですが，わざわざ npm モジュールをインストールするのが億劫で断念しました。`.gs` ファイルは，拡張子を `.js` にしていますので，Clasp を使ってコマンドラインから直接アップロードすることは一応可能です。
-
-https://github.com/Meiryo7743/web-counter
+しかし，技術が発展した現代，アクセスカウンターの設置にあたって CGI は不要です。本記事では，[Google Apps Script](https://developers.google.com/apps-script) を用いた実装を試みます。
 
 ## 実装
 
@@ -35,7 +31,9 @@ https://github.com/Meiryo7743/web-counter
 
 ## コード
 
-アクセスカウンターの実装に必要なコードです。[Google Apps Script の新規プロジェクトを作成](https://script.new)し，以下の内容をコピー&ペーストするだけで出来上がります。なお，コメントなし版を GitHub に上げておりますので，ご所望でしたらぜひご利用ください。
+アクセスカウンターの実装に必要なコードです。[Google Apps Script の新規プロジェクトを作成](https://script.new)し，以下の内容をコピー&ペーストするだけで出来上がります。なお，コメントなし版を Gist に上げておりますので，必要でしたらぜひご活用ください。
+
+https://gist.github.com/Meiryo7743/2958ef7c0ffa3d2a502284edb02c9f5b
 
 ### `doGet.gs`
 
@@ -44,13 +42,11 @@ const doGet = (e) => {
   const template = HtmlService.createTemplateFromFile("index.html");
   template.webCounter = webCounter(e.parameter.url);
 
-  const output = template
+  return template
     .evaluate()
     .addMetaTag("viewport", "width=device-width, initial-scale=1.0")
     .setTitle("Web Counter")
     .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
-
-  return output;
 };
 ```
 
@@ -77,38 +73,35 @@ const config = () => {
 ### カウント処理（`webCounter.gs`，`index.html`）
 
 ```js:webCounter.gs
-// 引数が URL かを判定
 const isUrl = (url) => {
   const REGEXP = /^https?:\/\/([A-zd-]+.)+[A-z]+\/?(.+)*/g;
   return typeof url === "string" && REGEXP.test(url);
 };
 
-// キリ番判定
-const isLuckyNumber = (integer) => {
+const isKiriban = (n) => {
   const REGEXP = /^(\d)\1+$|^\d0+$/g;
-  return typeof integer === "string" && REGEXP.test(integer);
+  return typeof n === "string" && REGEXP.test(n);
 };
 
-// カウント処理
-const count = (integer) => {
-  return typeof integer === "string" ? `${Number(integer) + 1}` : "1";
+const count = (n) => {
+  return typeof n === "string" ? `${Number(n) + 1}` : "1";
 };
 
 const webCounter = (url) => {
   const scriptProps = PropertiesService.getScriptProperties();
   const allowList = scriptProps.getProperty("ALLOW_LIST");
 
-  // 引数が許可リスト内の URL に該当する場合にのみ，カウント処理が走る
+  // 引数が URL かつ，許可リスト内に存在する場合だけ，カウントする
   if (isUrl(url) && allowList.includes(url)) {
     const result = count(scriptProps.getProperty(url));
     scriptProps.setProperty(url, result);
 
     // アクセス数を返す。キリ番なら☆を両側に添える
-    return isLuckyNumber(result) ? `☆${result}☆` : result;
+    return isKiriban(result) ? `☆${result}☆` : result;
+  } else {
+    // 不正な引数の場合は，円周率の近似値を表示する
+    return Math.PI.toString();
   }
-
-  // エラーメッセージを返す
-  return Math.PI.toString();
 };
 ```
 
@@ -187,9 +180,9 @@ const webCounter = (url) => {
 <iframe frameborder="0" loading="lazy" scrolling="no" src="https://script.google.com/macros/s/{DEPLOYMENT_ID}/exec?url={PARAMETER}" title="アクセスカウンター"></iframe>
 ```
 
-今回は以下の HTML ファイル（`embed.html`）を作成し，検証しました。
+今回は以下の HTML ファイル（`embedding-test.html`）を作成し，検証しました。
 
-```html:embed.html
+```html:embedding-test.html
 <!DOCTYPE html>
 <html>
   <head>
@@ -198,9 +191,11 @@ const webCounter = (url) => {
     <title>アクセスカウンターの埋め込み表示テスト</title>
     <style>
       body {
+        align-items: center;
         background: black;
         block-size: 100vh;
         display: flex;
+        justify-content: center;
         margin: 0;
       }
       iframe {
