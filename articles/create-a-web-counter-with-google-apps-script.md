@@ -2,7 +2,7 @@
 title: "Google Apps Script でアクセスカウンターを作る"
 emoji: "📈"
 type: "tech" # tech: 技術記事 / idea: アイデア
-topics: ["gas", "web"]
+topics: ["gas", "googleappsscript", "web"]
 published: true
 ---
 
