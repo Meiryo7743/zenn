@@ -14,7 +14,7 @@ jobs:
 
     steps:
       - name: actions/checkout@v2.3.4
-        uses: actions/checkout@25a956c84d5dd820d28caab9f86b8d183aeeff3d
+        uses: actions/checkout@afe4af09a72596f47d806ee5f8b2674ec07fdc73
 
       - name: actions/setup-node@v2.1.4
         uses: actions/setup-node@aa759c6c94d3800c55b8601f21ba4b2371704cb7
