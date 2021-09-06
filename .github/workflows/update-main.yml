@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - name: actions/checkout@v2.3.4
-        uses: actions/checkout@25a956c84d5dd820d28caab9f86b8d183aeeff3d
+        uses: actions/checkout@afe4af09a72596f47d806ee5f8b2674ec07fdc73
 
       - name: repo-sync/pull-request@v2.5
         uses: repo-sync/pull-request@65194d8015be7624d231796ddee1cd52a5023cb3
