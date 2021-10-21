@@ -14,7 +14,7 @@ jobs:
         uses: actions/checkout@afe4af09a72596f47d806ee5f8b2674ec07fdc73
 
       - name: repo-sync/pull-request@v2.5
-        uses: repo-sync/pull-request@65194d8015be7624d231796ddee1cd52a5023cb3
+        uses: repo-sync/pull-request@5ba2c80b97c87b9174c1548141b7acd80f6376e1
         with:
           source_branch: ${{ github.ref }}
           destination_branch: main
