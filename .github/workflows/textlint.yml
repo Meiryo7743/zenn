@@ -17,7 +17,7 @@ jobs:
         uses: actions/checkout@fd47087372161c6f2a7b96d2ef87e944d89023ed
 
       - name: actions/setup-node@v2.1.4
-        uses: actions/setup-node@fd4bd829f2dd6b6c1420bd94a93449c54612ffc2
+        uses: actions/setup-node@360ab8b75b056fc18d368ee27a78d34e29c0b2d9
         with:
           node-version: "14"
 
