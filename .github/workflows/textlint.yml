@@ -29,7 +29,7 @@ jobs:
           npx textlint --fix *.md
 
       - name: peter-evans/create-pull-request
-        uses: peter-evans/create-pull-request@3c3d696d5b8aa2eb0e70f76c251e4b149122acf1 # renovate: tag=v3.11.0
+        uses: peter-evans/create-pull-request@67df31e08a133c6a77008b89689677067fef169e # renovate: tag=v3.11.0
         with:
           branch-suffix: short-commit-hash
           branch: typo/auto-fix
