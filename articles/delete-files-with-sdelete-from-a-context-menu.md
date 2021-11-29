@@ -6,28 +6,29 @@ topics: ["sdelete", "windows", "powershell"]
 published: true
 ---
 
-『[Sysinternals File and Disk Utilities](https://docs.microsoft.com/en-us/sysinternals/downloads/file-and-disk-utilities)』の一部として提供されている，『[SDelete](https://docs.microsoft.com/en-us/sysinternals/downloads/sdelete)』というデータを完全削除できるコマンドラインツールがあります。例えば，PC や HDD， USB メモリーなどを初期化・廃棄するような場合に有用でしょう。そうした用途に限らず，機密情報が含まれる特定のファイルやディレクトリーなどを消し去りたいときにも役立ちます。
+[Sysinternals File and Disk Utilities](https://docs.microsoft.com/en-us/sysinternals/downloads/file-and-disk-utilities) の一部として提供されている，[SDelete](https://docs.microsoft.com/en-us/sysinternals/downloads/sdelete) というデータを完全削除できるコマンドラインツールがあります。これは HDD や USB メモリーなどを初期化・廃棄する際に有用でしょう。また，そうした用途に限らず，機微情報が含まれる特定のファイルやディレクトリーなどを消し去りたいときにも役立ちます。
 
-さて，後者の目的で SDelete を利用する場合，その都度，削除対象の絶対パスを指定する必要が生じます。[^abs]加えて，SDelete には Bash の `rm -i` のように削除するかどうかを尋ねる機能が備わっていません。そのため，たとえ間違ったパスを入力してしまったとしても，Enter キーを押下した瞬間には復元不可能なレベルで削除されてしまいます。また，それ以外に右クリックメニューから SDelete を実行できないことも欠点として挙げられるでしょう。ただ，SDelete はコマンドラインツールですから，こればかりは致し方ありません。
+さて，後者の目的で SDelete を利用する場合，その都度，削除対象の**絶対パス**を指定する必要があります。[^abs]加えて，SDelete には Bash の `rm -i` のように削除前するかどうかを実行前に尋ねてくれる機能が備わっていません。そのため，誤って削除対象とは異なるパスを入力した場合でも，Enter キーを押下した瞬間には復元不可能なレベルで削除してしまいます。また，それ以外に右クリックメニューから直接実行できないことも欠点として挙げられるでしょう。[^cui]
 
-[^abs]: もちろん相対パスで指定しても実行できますが，手元の環境ではなぜか時折うまくいかないことがありました。ゆえに，絶対パスで記述したほうが確実であると思われます。
+[^abs]: もちろん相対パスで指定しても実行できますが，手元の環境では，なぜか時折うまく実行されないことがありました。したがって，絶対パスで記述したほうが確実でしょう。
+[^cui]: SDelete はコマンドラインツールですから，こればかりは致し方ないとも捉えられます。
 
-しかし，そうはいってもやはり毎度コマンドを打ったり，パスをコピーして貼り付けたりするのは億劫です。何とかして上記の欠点を補えないかと思案した結果，**コンテキストメニューの「送る」から PowerShell スクリプトを実行すれば良い**という結論に達しました。[^why-powershell]本記事では，SDelete のインストール方法，スクリプトのコードを示すとともに，「送る」メニューへの登録手順についても説明いたします。
+毎回コマンドを打ったり，パスをコピーして貼り付けたりするのは，やはり億劫なものです。どうにかして上記の欠点を補えないかと思案した結果，**コンテキストメニューの「送る」から PowerShell スクリプトを実行すれば良い**という結論に達しました。[^why-powershell]本記事では，SDelete のインストール方法とその PowerShell スクリプトのコードを示すとともに，「送る」メニューへの登録手順についても説明いたします。
 
-[^why-powershell]: SDelete はコマンドプロンプトからも呼び出せますので，バッチファイルで書いても同じことができそうです。この場合，後述するショートカットを作成・配置するなどの小細工を必要とせず，ファイルを直接配置するだけで済みます。
+[^why-powershell]: SDelete はコマンドプロンプトからも呼び出せますので，バッチファイルでも同様に可能です。この場合，[後述する小細工](#「送る」への登録)を必要とせず，バッチファイルを直接配置するだけで済みます。
 
 ## SDelete のインストール
 
 SDelete をインストールする手順です。
 
 1. [SDelete のドキュメントページ](https://docs.microsoft.com/en-us/sysinternals/downloads/sdelete)にアクセスする。
-2. ページ上部にある「Download SDelete (x KB)」と表記されたリンクをクリックし，`SDelete.zip` をダウンロード及び解凍する。フォルダー内には，以下のファイルが含まれている。
+2. ページ上部にある「**Download SDelete (x KB)**」と表記されたリンクをクリックし，`SDelete.zip` をダウンロード及び解凍する。内部には以下のファイルが含まれている。
    - `Eula.txt`
    - `sdelete.exe`
    - `sdelete64.exe`
    - `sdelete64a.exe`
-3. `C:\Windows\System32` ディレクトリー直下に，`sdelete64.exe`（32-bit 版なら `sdelete.exe`）を置く。このとき，管理者権限を要求されるので留意すること。
-4. PowerShell で `sdelete` と入力し，次のような表示を得られたら成功。
+3. `C:\Windows\System32` 直下に，`sdelete64.exe`（32-bit 版なら `sdelete.exe`）を置く。このとき，管理者権限を要求されるので留意すること。
+4. PowerShell で `sdelete` と打ち，次のような表示を得られたら成功。
 
    ```
    SDelete v2.04 - Secure file delete
@@ -53,90 +54,95 @@ SDelete をインストールする手順です。
 
 ## PowerShell スクリプト
 
-コメントなし版を Gist に上げておりますので，ご希望でしたらそちらをご参照ください。
+Gist にもコードを置いてあります。
 
-https://gist.github.com/Meiryo7743/44bf84312a4b0b43f6e79157c48bf23b
+@[card](https://gist.github.com/Meiryo7743/44bf84312a4b0b43f6e79157c48bf23b)
 
 ```powershell
-# 削除対象を表示する
-Write-Output "The following items are going to be deleted:"
-
-foreach ($item in $Args) {
-  Write-Output $item
-}
-
-# 確認ダイアログ（Y/n）
-$title = "Confirmation"
-
-$message = "Once you start the operation, it is unable to restore the items. Are you sure want to delete them with SDelete?"
-
-$yes = New-Object System.Management.Automation.Host.ChoiceDescription "&Yes", `
-  "Execute the operation."
-
-$no = New-Object System.Management.Automation.Host.ChoiceDescription "&No", `
-  "Cancel the operation."
-
-$options = [System.Management.Automation.Host.ChoiceDescription[]]($yes, $no)
-
-$result = $host.ui.PromptForChoice($title, $message, $options, 0)
-
-switch ($result) {
-  # 「Y」を入力または「Enter」を押下した場合
+# 削除対象の絶対パスを表示する
+# 対象数が 0 の場合は何もせずに終了する
+switch ($Args.Length) {
   0 {
+    Write-Host "No item is selected."
+    exit
+  }
+  1 {
+    Write-Host "The following item will be deleted:"
+    Write-Host "$($Args)"
+  }
+  Default {
+    Write-Host "The following items will be deleted:"
     foreach ($item in $Args) {
-      # 削除対象が確かに存在するか調べる
-      $exists = Test-Path -Path $item
-
-      if ($exists) {
-        # 「-r」で再帰的に削除処理をする（フォルダーとその中身を全て削除）
-        # 「-p 5」は上書き削除を 5 回繰り返すことを意味する
-        sdelete -r -s -p 5 $item
-      }
-      else {
-        Write-Error -Messaege "Error: the execution was cancelled because of invalided path." -Category InvalidArgument
-      }
+      Write-Host "$($item)"
     }
   }
-  # 「n」を入力した場合
-  1 {
-    Write-Output "The execution was cancelled by user."
-  }
 }
 
-exit
+# 削除を実行するか尋ねる
+$title = "WARNING!"
+$message = "Once you start this operation, you cannot restore them all. Are you sure you want to delete them with SDelete?"
+$options = @(
+  New-Object System.Management.Automation.Host.ChoiceDescription(
+    "&Yes",
+    "Delete."
+  )
+  New-Object System.Management.Automation.Host.ChoiceDescription(
+    "&No",
+    "Cancel."
+  )
+)
+$choice = $host.ui.PromptForChoice(
+  $title,
+  $message,
+  $options,
+  1
+)
+switch ($choice) {
+  # [Y]: Delete
+  0 {
+    foreach ($item in $Args) {
+      sdelete -nobanner -r -s -p 5 $item
+    }
+  }
+
+  # [N]: Cancel (default)
+  1 {
+    Write-Host "You cancelled this operation."
+  }
+}
 ```
 
-## 「送る」への登録方法
+## 「送る」への登録
 
-以下の操作手順を踏むことで，いつでも右クリックメニューの「送る」から SDelete による削除ができるようになります。
+以下の操作手順を踏むことで，いつでも右クリックメニューの「送る」から SDelete による削除が可能です。
 
 1. 上記の PowerShell スクリプトを任意の場所に `.ps1` ファイルとして保存する。
-2. そのファイルのショートカットを作成する。
+2. 保存したファイルのショートカットを作成する。
 3. ［**右クリック**］→［**プロパティー**］→［**リンク先**］の先頭に `powershell -ExecutionPolicy RemoteSigned -File ` を付加する。デフォルトの設定では PowerShell スクリプトをクリックで実行できず，一時的にセキュリティーポリシーを変更する必要があるため。
 4. Win + R で「ファイル名を指定して実行」を呼び出し，`shell:sendto` と入力する。
-5. フォルダーが開かれるので，そこに**手順 3 で作ったショートカット**を設置する。
+5. 表示されたディレクトリー内に**手順 3 で作ったショートカット**を設置する。
 
-注意すべき点は，手順 3 にあるとおり，PowerShell のデフォルト設定では，`.ps1` ファイルをバッチファイルのようにクリックで実行できない，ということです。解決方法はいくつかあるのですが，ここでは一番手軽なショートカットによる手法を用いました。PowerShell は Windows の様々な機能を操作できますから，悪用されるのを防ぐためにそうなっているのでしょう。
+注意すべき点は，**手順 3** にあるとおり，PowerShell のデフォルト設定では，`.ps1` ファイルをバッチファイルのようにクリックで実行できないことです。解決方法はいくつかあるのですが，ここでは一番手軽なショートカットによる手法を用いました。PowerShell は Windows の様々な機能にアクセスできますから，悪用されるのを防ぐためにこうなっているのでしょう。
 
 ## 削除までの流れ
 
 実際に右クリックメニューの「送る」から SDelete による削除を試してみましょう。
 
-1. 削除したいファイルやフォルダーを選択する（複数可）。
+1. 削除したいファイルやディレクトリーを選択する（複数可）。
 2. ［**右クリック**］→［**送る**］→［**（ショートカット名）**］をクリックする。
-3. PowerShell が立ち上がり，削除する対象が表示される。誤りがなければそのまま Enter キーを叩く。
-4. SDelete によって対象の削除が行われる。処理が完了すると，PowerShell は自動的に終了する。
+3. PowerShell が立ち上がり，削除する対象と確認ダイアログが表示される。誤りがなければ `y` と入力し，Enter キーを叩く。
+4. SDelete による削除が行われる。処理が完了すると，PowerShell は自動的に終了する。
 
 ## 参考
 
 <!-- textlint-disable -->
 
-https://docs.microsoft.com/en-us/sysinternals/downloads/sdelete
+@[card](https://docs.microsoft.com/en-us/sysinternals/downloads/sdelete)
 
-https://stoneedge.com/help/mergedProjects/pm/PM_How_to_Use_Microsoft_SysInternals_SDelete_Command.htm
+@[card](https://stoneedge.com/help/mergedProjects/pm/PM_How_to_Use_Microsoft_SysInternals_SDelete_Command.htm)
 
-https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-powershell-1.0/ff730939(v=technet.10)
+@[card](https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-powershell-1.0/ff730939(v=technet.10))
 
-https://qiita.com/tomoko523/items/df8e384d32a377381ef9
+@[card](https://qiita.com/tomoko523/items/df8e384d32a377381ef9)
 
 <!-- textlint-enable -->
