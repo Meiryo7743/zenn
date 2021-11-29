@@ -13,13 +13,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: actions/checkout@v2.3.4
-        uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f
+      - name: actions/checkout
+        uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579 # renovate: tag=v2.4.0
 
-      - name: actions/setup-node@v2.1.4
-        uses: actions/setup-node@c46424eee26de4078d34105d3de3cc4992202b1e
+      - name: actions/setup-node
+        uses: actions/setup-node@270253e841af726300e85d718a5f606959b2903c # renovate: tag=v2.4.1
         with:
-          node-version: "14"
+          node-version: 16
+          cache: npm
 
       - name: Install dependencies
         run: npm ci
@@ -28,8 +29,8 @@ jobs:
         run: |
           npx textlint --fix *.md
 
-      - name: peter-evans/create-pull-request@v3.8.2
-        uses: peter-evans/create-pull-request@052fc72b4198ba9fbc81b818c6e1859f747d49a8
+      - name: peter-evans/create-pull-request
+        uses: peter-evans/create-pull-request@67df31e08a133c6a77008b89689677067fef169e # renovate: tag=v3.11.0
         with:
           branch-suffix: short-commit-hash
           branch: typo/auto-fix

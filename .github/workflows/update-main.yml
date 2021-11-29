@@ -10,11 +10,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: actions/checkout@v2.3.4
-        uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f
+      - name: actions/checkout
+        uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579 # renovate: tag=v2.4.0
 
-      - name: repo-sync/pull-request@v2.5
-        uses: repo-sync/pull-request@d80b305e358ef8131f270608735c72e2c913f2af
+      - name: repo-sync/pull-request
+        uses: repo-sync/pull-request@5ba2c80b97c87b9174c1548141b7acd80f6376e1 # renovate: tag=v2.6.1
         with:
           source_branch: ${{ github.ref }}
           destination_branch: main
