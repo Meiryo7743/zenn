@@ -2,13 +2,11 @@ name: Update main
 
 on:
   push:
-    branches:
-      - dev
+    branches: [draft]
 
 jobs:
   update:
     runs-on: ubuntu-latest
-
     steps:
       - name: actions/checkout
         uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579 # renovate: tag=v2.4.0
@@ -16,9 +14,9 @@ jobs:
       - name: repo-sync/pull-request
         uses: repo-sync/pull-request@5ba2c80b97c87b9174c1548141b7acd80f6376e1 # renovate: tag=v2.6.1
         with:
-          source_branch: ${{ github.ref }}
           destination_branch: main
-          pr_title: Update main
-          pr_label: auto-pr
-          pr_allow_empty: false
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          pr_allow_empty: false
+          pr_label: auto-pr
+          pr_title: Update main
+          source_branch: ${{ github.ref }}
