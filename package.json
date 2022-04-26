@@ -9,7 +9,7 @@
   },
   "devDependencies": {
     "husky": "7.0.4",
-    "lint-staged": "12.3.8",
+    "lint-staged": "12.4.1",
     "prettier": "2.6.2",
     "textlint": "12.1.1",
     "textlint-filter-rule-comments": "1.2.2",
