@@ -1,4 +1,4 @@
-name: Update main
+name: Publish
 
 on:
   push:
@@ -18,5 +18,5 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           pr_allow_empty: false
           pr_label: auto-pr
-          pr_title: Update main
+          pr_title: Publish
           source_branch: ${{ github.ref }}
