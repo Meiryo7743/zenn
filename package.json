@@ -1,6 +1,6 @@
 {
-  "name": "meiryo7743-zenn-contents",
-  "version": "1.0.0",
+  "name": "zenn",
+  "version": "2.0.0",
   "private": true,
   "author": "Meiryo7743",
   "scripts": {
@@ -11,14 +11,6 @@
     "husky": "8.0.2",
     "lint-staged": "13.0.3",
     "prettier": "2.7.1",
-    "textlint": "12.2.3",
-    "textlint-filter-rule-comments": "1.2.2",
-    "textlint-filter-rule-node-types": "1.1.0",
-    "textlint-rule-abbr-within-parentheses": "1.0.2",
-    "textlint-rule-preset-ja-engineering-paper": "1.0.4",
-    "textlint-rule-preset-ja-spacing": "2.2.0",
-    "textlint-rule-preset-ja-technical-writing": "7.0.0",
-    "textlint-rule-spellcheck-tech-word": "5.0.0",
     "zenn-cli": "0.1.132"
   },
   "husky": {
