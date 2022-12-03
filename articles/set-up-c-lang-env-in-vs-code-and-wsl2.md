@@ -81,7 +81,7 @@ WSL 2 上の Ubuntu で VS Code を使うにあたって，「[Remove Developmen
 
 続いて，**先ほど開いた WSL 側のウィンドウ**[^wsl-window]から「[C/C++ Extension Pack](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools-extension-pack)」を追加します。先と同じく「**Install in WSL: Ubuntu**」を押下すれば良いです。
 
-[^wsl-window]: 左下のステータスバーに「**WSL: Ubuntu**」と表示されているウィンドウ
+[^wsl-window]: 左下のステータスバーに「**WSL: Ubuntu**」と表示されているウィンドウのこと。
 
 ![「C/C++ Extension Pack」を追加するときの画面](https://storage.googleapis.com/zenn-user-upload/a660dd19de32-20221203.png)
 
@@ -147,7 +147,9 @@ int main(void)
 
 ## （補足）`tasks.json` をカスタマイズする
 
-[手順 5](#5.-ワークスペースを作成し，実際に-c-言語のコードを実行してみる) では，`example.c` を Tasks 機能でコンパイルすると `example` という拡張子なしのバイナリファイルが生成されました。通常，GCC でコンパイルすると生成されたバイナリファイルには `.out` という拡張子が付きます。Tasks 機能でも，ワークスペース直下に自動生成された `.vscode/tasks.json`（Tasks 機能の設定ファイル）を編集すれば，同様のことを実現可能です。
+[手順 5](#5.-ワークスペースを作成し，実際に-c-言語のコードを実行してみる) では，`example.c` を Tasks 機能でコンパイルすると `example` という拡張子なしのバイナリファイルが生成されました。通常，GCC でコンパイルすると生成されたバイナリファイルには `.out` という拡張子が付きます。Tasks 機能でも，ワークスペース直下に自動生成された `.vscode/tasks.json`[^tasks-json]を編集すれば，同様のことを実現可能です。
+
+[^tasks-json]: Tasks 機能の設定ファイルのこと。
 
 ```diff json:tasks.json
 {
