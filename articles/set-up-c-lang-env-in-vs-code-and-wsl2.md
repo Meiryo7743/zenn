@@ -23,11 +23,6 @@ published: false
 
 ## 導入手順
 
-1. VS Code をインストールする
-2. WSL 2 を有効化し，Ubuntu をインストールする
-3. GCC と GDB をインストールする
-4. ワークスペースを作成する
-
 ### 1. VS Code をインストールする
 
 :::message
@@ -206,5 +201,3 @@ int main(void)
     "version": "2.0.0"
 }
 ```
-
-## 参考
