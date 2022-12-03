@@ -97,7 +97,7 @@ WSL 2 上の Ubuntu で VS Code を使うにあたって，「[Remove Developmen
 
 :::
 
-[GCC](https://gcc.gnu.org/)（コンパイラー）と [GDB](https://www.sourceware.org/gdb/)（デバッガー）の両方が WSL 2 上の Ubuntu にないと，VS Code の task 機能がエラーを出して動いてくれません。そのため，以下のコマンドを実行して両者のインストールを行います。なお，実行時にパスワードを要求されたときは，**WSL 2 の Ubuntu で設定したユーザーパスワード**を入力してください。
+[GCC](https://gcc.gnu.org/)（コンパイラー）と [GDB](https://www.sourceware.org/gdb/)（デバッガー）の両方が WSL 2 上の Ubuntu にないと，VS Code の Tasks 機能がエラーとなり動いてくれません。そのため，以下のコマンドを実行して両者のインストールを行います。なお，実行時にパスワードを要求されたときは，**WSL 2 の Ubuntu で設定したユーザーパスワード**を入力してください。
 
 ```
 sudo apt install gcc gdb
