@@ -1,31 +1,30 @@
 ---
-title: "VS Code & WSL2 で C 言語の開発環境をサクッと構築する"
+title: "VS Code & WSL 2 で C 言語の開発環境をサクッと構築する"
 emoji: "⚙"
 type: "tech" # tech: 技術記事 / idea: アイデア
-topics: ["C", "C言語", "vscode", "WSL2"]
+topics: ["C", "C言語", "vscode", "wsl2"]
 published: false
 ---
 
-## この記事で行うこと
-
-[WSL2（Windows Subsystem for Linux）]()を用いてインストールした Ubuntu 上に，**[VS Code]() で C 言語のコードを書いて簡単にコンパイルとデバッグが可能な環境**を作り上げます。
+[WSL 2（Windows Subsystem for Linux）](https://learn.microsoft.com/en-us/windows/wsl/)からインストールした Ubuntu 上で，**VS Code の [Tasks 機能](https://code.visualstudio.com/docs/editor/tasks)を使って C 言語のコードを書いて簡単にコンパイルとデバッグが可能な環境**を作り上げます。
 
 :::message alert
 
-**WSL2 は Windows 固有の機能**です。MacOS をはじめとする Windows 以外の OS は本記事の対象外となります。
+**WSL 2 は Windows 固有の機能**です。MacOS をはじめとする Windows 以外の OS では実現できません。
 
 :::
 
 ## ターゲット
 
 - VS Code で C 言語のコードを書きたい人
-  - 特に，例えば C 言語は大学の授業でしか書く機会がないなど，さほど本格的な開発環境は求めていないケースを想定しています。
-- 既に別の環境で C 言語のコードを書いているが，訳あって VS Code と WSL2 による環境へと移行しようか検討している人
+- 既に別の環境で C 言語のコードを書いているが，VS Code と WSL 2 による環境へと移行しようか検討している人
+
+いずれの場合も，例えば「C 言語のコードは大学の授業でしか書く機会がない」といった，さほど本格的（？）な開発環境は求めていないケースを想定しています。
 
 ## 導入手順
 
 1. VS Code をインストールする
-2. WSL2 を有効化し，Ubuntu をインストールする
+2. WSL 2 を有効化し，Ubuntu をインストールする
 3. GCC と GDB をインストールする
 4. ワークスペースを作成する
 
@@ -33,34 +32,101 @@ published: false
 
 :::message
 
-既に Ubuntu をインストール済みの場合は，この手順を読み飛ばし，次の「[GCC と GDB をインストールする](#2.-wsl2-を有効化し，ubuntu-をインストールする)」にお進みください。
+既に VS Code をインストール済みの場合は，この手順を読み飛ばし，次の「[WSL 2 から Ubuntu をインストールする](#2.-wsl-2-から-ubuntu-をインストールする)」にお進みください。
 
 :::
 
-### 2. WSL2 を有効化し，Ubuntu をインストールする
+C 言語のコードを書くエディターとして「[VS Code](https://code.visualstudio.com/)」を使います。公式サイトの「**Download for Windows Stable Build**」をクリックし，インストーラーをダウンロードしましょう。
+
+![](https://storage.googleapis.com/zenn-user-upload/7d9961b688c5-20221203.png)
+
+あとはダウンロードしたインストーラーを実行し，画面指示に従って操作するだけで VS Code のインストール作業は完了です。
+
+### 2. WSL 2 から Ubuntu をインストールする
 
 :::message
 
-既に WSL2 で Ubuntu をインストール済みの場合は，この手順を読み飛ばし，次の「[GCC と GDB をインストールする](#3.-gcc-と-gdb-をインストールする)」にお進みください。
+既に WSL 2 上で Ubuntu をインストール済みの場合は，この手順を読み飛ばし，次の「[VS Code に拡張機能をインストールする](#3.-vs-code-に拡張機能をインストールする)」にお進みください。
 
 :::
 
-### 3. GCC と GDB をインストールする
-
-次のコマンドで C 言語のコンパイラーをインストールします。
+続いて，WSL 2 上に Ubuntu をインストールして行きましょう。PowerShell（もしくはコマンドプロンプト）を起動し，以下のコマンドを実行してください。
 
 ```
-sudo apt install gcc
-sudo apt install gdb
+wsl --install -d Ubuntu
 ```
 
-### 4. ワークスペースを作成する
+そのまま気長に待ち続けると，やがて Ubuntu のウィンドウが出現するはずです。
+
+![](https://storage.googleapis.com/zenn-user-upload/8698ac462836-20221203.png)
+
+このあと，Ubuntu のウィンドウの指示に従って，ユーザー名とパスワードを設定します。最終的に以下の画像のような状態になれば，WSL 2 と Ubuntu のセットアップは完了です。
+
+![](https://storage.googleapis.com/zenn-user-upload/25c10d8a5dfa-20221203.png)
+
+### 3. VS Code に拡張機能をインストールする
+
+:::message
+
+ここでは，VS Code に「Remote Development」と「C/C++ Extension Pack」をインストールしていきます。既にこの 2 つがインストール済みの場合は，この手順を読み飛ばし，次の「[Ubuntu に GCC と GDB をインストールする](#4.-ubuntu-に-gcc-と-gdb-をインストールする)」にお進みください。
+
+:::
+
+WSL 2 上の Ubuntu で VS Code を使うにあたって，「[Remove Development](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack)」は欠かせません。「**Install**」ボタンをクリックしてインストールしましょう。
+
+![](https://storage.googleapis.com/zenn-user-upload/2c9b2c13d4a7-20221203.png)
+
+インストールが無事に成功すると，次のような画面が現れるはずです。後述の「C/C++ Extension Pack」をインストールする準備のため，「**Open the Menu**」ボタンをクリックします。
+
+![](https://storage.googleapis.com/zenn-user-upload/01d2d4cc24ec-20221203.png)
+
+「New: WSL Window」を選択し，クリックします。そうすると，新しく VS Code のウィンドウが立ち上がります。
+
+![](https://storage.googleapis.com/zenn-user-upload/fbb0bdd7a594-20221203.png)
+
+続いて，**先ほど開いた WSL 側のウィンドウ**[^wsl-window]から「[C/C++ Extension Pack](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools-extension-pack)」を追加します。先と同じく「**Install in WSL: Ubuntu**」を押下すれば良いです。
+
+[^wsl-window]: 左下のステータスバーに「**WSL: Ubuntu**」と表示されているウィンドウ
+
+![「C/C++ Extension Pack」を追加するときの画面](https://storage.googleapis.com/zenn-user-upload/a660dd19de32-20221203.png)
+
+この拡張機能が追加されるまで 5 分ほどの時間を要します。気長に待ちましょう。しばらくして，下のような状態になっていれば無事完了です。
+
+![「C/C++ Extension Pack」を無事に追加できたときの画面](https://storage.googleapis.com/zenn-user-upload/08f20b9fc5e3-20221203.png)
+
+### 4. Ubuntu に GCC と GDB をインストールする
+
+:::message
+
+既に WSL 2 上の Ubuntu で GCC と GDB の両方がインストール済みの場合，この手順を読み飛ばし，次の「[ワークスペースを作成する](#5.-ワークスペースを作成する)」にお進みください。
+
+:::
+
+[GCC](https://gcc.gnu.org/)（コンパイラー）と [GDB](https://www.sourceware.org/gdb/)（デバッガー）の両方が WSL 2 上の Ubuntu にないと，VS Code の task 機能がエラーを出して動いてくれません。そのため，以下のコマンドを実行して両者のインストールを行います。なお，実行時にパスワードを要求されたときは，**WSL 2 の Ubuntu で設定したユーザーパスワード**を入力してください。
+
+```
+sudo apt install gcc gdb
+```
+
+### 5. ワークスペースを作成する
 
 VS Code で C 言語のコードを書くためのワークスペース（作業場所）を作成します。今回は，例としてホームディレクトリーの直下に `example` という名のディレクトリーを作り，これをワークスペースとしましょう。具体的には，以下のコマンドをそのまま実行するだけです。
 
 ```
 cd && mkdir test && code $_
 ```
+
+`Installing VS Code Server for x64`
+
+![](https://storage.googleapis.com/zenn-user-upload/983a0f033475-20221203.png)
+
+![](https://storage.googleapis.com/zenn-user-upload/b94f166f98b9-20221203.png)
+
+![](https://storage.googleapis.com/zenn-user-upload/e52551e0b631-20221203.png)
+
+![](https://storage.googleapis.com/zenn-user-upload/9a5979774042-20221203.png)
+
+![](https://storage.googleapis.com/zenn-user-upload/3fe542c60c28-20221203.png)
 
 続いて，以下のプログラム `example.c` を作成します。
 
