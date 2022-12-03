@@ -3,7 +3,7 @@ title: "VS Code & WSL 2 で C 言語の開発環境を構築する"
 emoji: "⚙"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["C", "C言語", "vscode", "wsl2"]
-published: false
+published: true
 ---
 
 [WSL 2（Windows Subsystem for Linux）](https://learn.microsoft.com/en-us/windows/wsl/)からインストールした Ubuntu 上で，**VS Code の [Tasks 機能](https://code.visualstudio.com/docs/editor/tasks)を使って C 言語のコードを書いて簡単にコンパイルとデバッグが可能な環境**を作り上げます。
