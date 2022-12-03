@@ -1,5 +1,5 @@
 ---
-title: "VS Code & WSL 2 で C 言語の開発環境をサクッと構築する"
+title: "VS Code & WSL 2 で C 言語の開発環境を構築する"
 emoji: "⚙"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["C", "C言語", "vscode", "wsl2"]
