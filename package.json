@@ -11,7 +11,7 @@
     "husky": "8.0.3",
     "lint-staged": "13.1.0",
     "prettier": "2.8.3",
-    "zenn-cli": "0.1.135"
+    "zenn-cli": "0.1.137"
   },
   "husky": {
     "hooks": {
