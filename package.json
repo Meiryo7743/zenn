@@ -10,7 +10,7 @@
   "devDependencies": {
     "husky": "8.0.3",
     "lint-staged": "13.2.1",
-    "prettier": "2.8.8",
+    "prettier": "3.0.0",
     "zenn-cli": "0.1.143"
   },
   "husky": {
