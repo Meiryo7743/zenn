@@ -8,7 +8,7 @@
     "start": "zenn preview"
   },
   "devDependencies": {
-    "husky": "9.0.10",
+    "husky": "9.0.11",
     "lint-staged": "13.3.0",
     "prettier": "3.2.5",
     "zenn-cli": "0.1.153"
