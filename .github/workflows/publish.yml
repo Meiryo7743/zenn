@@ -9,10 +9,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: actions/checkout
-        uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8 # tag=v3.1.0
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
 
       - name: repo-sync/pull-request
-        uses: repo-sync/pull-request@65785d95a5a466e46a9d0708933a3bd51bbf9dde # tag=v2.6.2
+        uses: repo-sync/pull-request@7e79a9f5dc3ad0ce53138f01df2fad14a04831c5 # v2.12.1
         with:
           destination_branch: main
           github_token: ${{ secrets.GITHUB_TOKEN }}
